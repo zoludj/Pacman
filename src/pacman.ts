@@ -10,22 +10,42 @@ export class Pacman {
     this.cell = cell;
   }
 
-  move(direction: string, score: number, peas: Cell[]) {
+  pacmanMoveLeft() {
+    this.cell.y = isInArray(this.cell.x, this.cell.y - 1, walls)
+      ? this.cell.y
+      : this.cell.y - 1;
+  }
+  pacmanMoveDown() {
+    this.cell.x = isInArray(this.cell.x + 1, this.cell.y, walls)
+      ? this.cell.x
+      : this.cell.x + 1;
+  }
+  pacmanMoveRight() {
+    this.cell.y = isInArray(this.cell.x, this.cell.y + 1, walls)
+    ? this.cell.y
+    : this.cell.y + 1;
+
+  }
+
+  pacmanMoveUp(){
+     this.cell.x = isInArray(this.cell.x - 1, this.cell.y, walls) ? this.cell.x : this.cell.x - 1;
+  }
+
+  move(direction: Direction, score: number, peas: Cell[]) {
+
     switch (direction) {
       case "Up":
-        this.cell.x = isInArray(this.cell.x - 1, this.cell.y, walls)? this.cell.x : this.cell.x - 1;
+        this.cell.x = isInArray(this.cell.x - 1, this.cell.y, walls) ? this.cell.x : this.cell.x - 1;
         break;
       case "Right":
         this.cell.y = isInArray(this.cell.x, this.cell.y + 1, walls)
           ? this.cell.y
           : this.cell.y + 1;
-
         break;
       case "Left":
         this.cell.y = isInArray(this.cell.x, this.cell.y - 1, walls)
           ? this.cell.y
           : this.cell.y - 1;
-
         break;
       case "Down":
         this.cell.x = isInArray(this.cell.x + 1, this.cell.y, walls)

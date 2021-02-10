@@ -6,12 +6,13 @@ import { green } from "./greenGhost";
 import { yellow } from "./yellowGhost";
 import { red } from "./redGhost";
 import { walls } from "./walls";
-import { peas, score } from "./peas";
+import { peas } from "./peas";
 import { isInArray } from "./util";
 import * as keypress from "keypress";
 import * as chalk from "chalk";
 import { Direction } from "./direction";
-import { MapLoader } from "./mapLoader"
+
+
 
 
 const FRAMES_PER_SECOND = 2;
@@ -26,6 +27,7 @@ export class Game {
   width: number
 
 
+
   constructor() {
 
     this.pacman = pacman;
@@ -33,8 +35,9 @@ export class Game {
     this.peas = [];
     this.score = 0;
     this.ghosts = [blue, green, yellow, red];
-    this.heigth = 600
-    this.width = 600
+    this.heigth = 1500
+    this.width = 1500
+
 
 
     for (let i = 0; i < 15; i++) {
@@ -46,10 +49,13 @@ export class Game {
     }
   }
 
+
   start(): any {
     this.play();
+
   }
   play() {
+
 
     keypress(process.stdin);
     process.stdin.setRawMode(true);
@@ -92,20 +98,33 @@ export class Game {
   }
 
   draw(direction: Direction) {
+    this.process(direction, this.printField());
+  }
+
+  process(direction: Direction, fn) {
+
     pacman.move(direction, this.score, this.peas);
-    this.printField();
-    console.log(chalk.red(`score: ${this.score}`));
+    fn;
     this.score = 0 + (100 - this.peas.length) * 10
-    this.ghosts.forEach((it) => it.move())
-    blue.kill(pacman)
-    green.kill(pacman)
-    red.kill(pacman)
-    yellow.kill(pacman)
-
-
+    this.ghosts.forEach((it) => {
+      it.move();
+      it.kill(pacman);
+    })
   }
 
   printField(): void {
+
+
+
+    // const fs = require('fs')
+    // fs.readFile('/Users/vlad8/JS/typescript-canvas-template-main/src/mapEasy.txt', 'utf8', (err, data) => {
+    //   if (err) {
+    //     console.error(err)
+    //     return
+    //   }
+    //   console.log(data.toString())
+    // })
+
     console.clear()
     for (let i = 0; i < 15; i++) {
       let row = "";
@@ -137,7 +156,10 @@ export class Game {
         }
       }
       console.log(row);
+
     }
+    console.log(chalk.red(`score: ${this.score}`));
   }
+
 }
 

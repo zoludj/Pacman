@@ -53,7 +53,7 @@ export class Ghosts {
   kill(pac: Pacman) {
     if (this.cell.x === pac.cell.x && this.cell.y === pac.cell.y) {
       console.log("lose")
-      process.exit();
+      process.exit?.(1);
 
 
     }

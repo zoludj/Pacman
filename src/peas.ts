@@ -1,5 +1,4 @@
 import { Cell } from "./cell";
-import { walls } from "./walls";
 import { isInArray } from "./util";
 import { Pacman } from "./pacman";
 
@@ -14,6 +13,9 @@ export const peas = (walls: Cell[]): Cell[] => {
   }
   return peas;
 };
+
+
+
 export let score = 0;
 const numberOfPeas = (pacman: Pacman, peas: Cell[], score: number): void => {
   let founded: Cell | undefined = peas.find(
